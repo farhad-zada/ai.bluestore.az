@@ -2,7 +2,20 @@ import express from "express";
 import session from "express-session";
 import ai from "./routes/ai.js";
 import { config } from "dotenv";
+import rateLimit from "express-rate-limit";
 config();
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: {
+    status: false,
+    message: "Too many requests, please try again later.",
+  },
+  headers: true, // Include rate limit headers in the response
+  standardHeaders: true, // Send `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
 
 const app = express();
 
@@ -18,6 +31,8 @@ app.use(
     },
   })
 );
+
+app.use(limiter);
 
 app.use(express.static(`./static`));
 // Middleware to parse JSON bodies (if needed)

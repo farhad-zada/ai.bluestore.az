@@ -34,5 +34,4 @@ export function pushMessages(session, msg) {
    */
   let msgs = sessionMessages[session];
   msgs.push(msg);
-  console.log(msgs.length);
 }
