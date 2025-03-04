@@ -2,27 +2,8 @@ import express from "express";
 import session from "express-session";
 import ai from "./routes/ai.js";
 import { config } from "dotenv";
-import rateLimit from "express-rate-limit";
 config();
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
-  message: {
-    status: false,
-    message: "Too many requests, please try again later.",
-  },
-  headers: true, // Include rate limit headers in the response
-  standardHeaders: true, // Send `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-  validate: {
-    trustProxy: false,
-  }
-});
-
 const app = express();
-
-app.set('trust proxy', "loopback");
 
 // Configure session middleware
 app.use(
@@ -36,8 +17,6 @@ app.use(
     },
   })
 );
-
-app.use(limiter);
 
 app.use(express.static(`./static`));
 app.use(express.json());
