@@ -3,6 +3,7 @@ import session from "express-session";
 import ai from "./routes/ai.js";
 import { config } from "dotenv";
 import rateLimit from "express-rate-limit";
+import cors from "cors";
 config();
 
 const limiter = rateLimit({
@@ -18,6 +19,13 @@ const limiter = rateLimit({
 });
 
 const app = express();
+
+app.use(
+  cors({
+    origin: true, // Allows all origins
+    credentials: true, // Allows cookies/credentials to be sent
+  })
+);
 
 // Configure session middleware
 app.use(
