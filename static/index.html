@@ -560,7 +560,7 @@
         thisButton.style.display = "none";
 
         if (sessionActive) {
-          await fetch("http://localhost:3000/session", {
+          await fetch("http://ai.bluestore.az/session", {
             method: "DELETE",
             headers: {
               Accept: "application/json",
@@ -569,7 +569,7 @@
         }
 
         try {
-          const response = await fetch("http://localhost:3000/session", {
+          const response = await fetch("http://ai.bluestore.az/session", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -616,7 +616,7 @@
         updateInputPosition();
         const loadingDiv = showLoading();
         try {
-          let response = await fetch("http://localhost:3000/session", {
+          let response = await fetch("http://ai.bluestore.az/session", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
