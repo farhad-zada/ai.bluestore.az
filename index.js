@@ -19,6 +19,8 @@ const limiter = rateLimit({
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 // Configure session middleware
 app.use(
   session({
