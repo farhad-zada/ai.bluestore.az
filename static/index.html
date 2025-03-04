@@ -51,6 +51,7 @@
         flex: 1;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
       }
 
       #input-container {
@@ -277,7 +278,7 @@
 
       @media (max-width: 1024px) {
         #chat-container {
-          max-height: 60vh;
+          max-height: 70vh;
         }
       }
       @media (max-width: 768px) {
@@ -296,7 +297,7 @@
 
         #chat-container {
           padding: 10px;
-          max-height: 60vh;
+          max-height: 70vh;
         }
 
         #suggestions {
@@ -354,15 +355,15 @@
 
       @media (max-width: 480px) {
         #input-container {
-          width: 92%;
+          width: 90%;
         }
 
         #welcome-message {
           font-size: 10px;
         }
         #chat-container {
-          padding: 5px;
-          max-height: 55vh;
+          padding: 1px;
+          max-height: 70vh;
         }
 
         #input-container.focused,
@@ -559,7 +560,7 @@
         thisButton.style.display = "none";
 
         if (sessionActive) {
-          await fetch("http://ai.bluestore.az/session", {
+          await fetch("http://localhost:3000/session", {
             method: "DELETE",
             headers: {
               Accept: "application/json",
@@ -568,7 +569,7 @@
         }
 
         try {
-          const response = await fetch("http://ai.bluestore.az/session", {
+          const response = await fetch("http://localhost:3000/session", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -615,7 +616,7 @@
         updateInputPosition();
         const loadingDiv = showLoading();
         try {
-          let response = await fetch("http://ai.bluestore.az/session", {
+          let response = await fetch("http://localhost:3000/session", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
