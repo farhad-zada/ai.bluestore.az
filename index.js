@@ -20,12 +20,18 @@ const limiter = rateLimit({
 
 const app = express();
 
-app.use(
-  cors({
-    origin: true, // Allows all origins
-    credentials: true, // Allows cookies/credentials to be sent
-  })
-);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*"); // Allows all origins
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Allowed methods
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"); // Allowed headers
+
+  // Handle preflight OPTIONS requests
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+
+  next();
+});
 
 // Configure session middleware
 app.use(
