@@ -3,7 +3,6 @@ import session from "express-session";
 import ai from "./routes/ai.js";
 import { config } from "dotenv";
 import rateLimit from "express-rate-limit";
-import cors from "cors";
 config();
 
 const limiter = rateLimit({
@@ -19,19 +18,6 @@ const limiter = rateLimit({
 });
 
 const app = express();
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // Allows all origins
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Allowed methods
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"); // Allowed headers
-
-  // Handle preflight OPTIONS requests
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-
-  next();
-});
 
 // Configure session middleware
 app.use(
@@ -49,7 +35,6 @@ app.use(
 app.use(limiter);
 
 app.use(express.static(`./static`));
-// Middleware to parse JSON bodies (if needed)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
