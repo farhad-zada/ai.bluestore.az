@@ -15,11 +15,14 @@ const limiter = rateLimit({
   headers: true, // Include rate limit headers in the response
   standardHeaders: true, // Send `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  validate: {
+    trustProxy: false,
+  }
 });
 
 const app = express();
 
-app.set('trust proxy', 1);
+app.set('trust proxy', "loopback");
 
 // Configure session middleware
 app.use(
