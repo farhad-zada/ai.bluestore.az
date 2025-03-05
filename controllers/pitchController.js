@@ -17,7 +17,7 @@ Do not include the pitch in your response. You can ask questions, provide sugges
 Do not answer any question not related to the pitch.
 Do not provide any information about the pitch that is not explicitly mentioned in the user's message.
 Do not make up any information about BlueStore that is not in the pitch.
-Make styled and well to read messages.
+Use markdown if needed such use bold to show the importance of key points, divide into steps to make clear responses etc.
 """
 ${pitch()}
 """
